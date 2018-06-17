@@ -1,0 +1,78 @@
+
+
+#CommonButtons { margin-top: 20px; }
+
+button 
+{
+	font-family: 'lucida sans unicode', arial, sans-serif;
+	background-color: #A80000; 
+	color: white;
+	border: none;
+	padding: 5px 10px;
+}
+
+.PoolLine
+{
+	margin-bottom: 20px;
+	border-top: 2px solid;
+}
+.PoolLine div { padding: 2px 0; }
+
+.PoolTitle 
+{
+	overflow: auto;
+}
+.PoolNameContainer { float: left; }
+.PoolName
+{
+	font-size: 16px;
+	color: #43423F;
+	font-weight: bold;
+}
+.PoolLine div.PoolEthContainer
+{
+	float: right;
+	font-weight: bold;
+}
+.PoolLine div.PoolIdContainer { font-size: 9px; padding: 0; font-weight: bold;}
+
+.PoolCart { overflow: auto; }
+.PoolCartLeft { float: left; }
+.PoolCartRight { float: right; text-align:right; }
+.ticketLabel, .ticketValue { display: inline-block; margin-right: 10px; }
+.ticketValue { margin-right: 0; }
+
+.PoolBottom { overflow: auto; }
+.TicketCount { width: 120px;  font-size: 18px; padding: 10px; box-sizing: border-box; height: 40px; display:inline-block; vertical-align: top; outline: 0; }
+.BtnPlay { box-sizing: border-box; height: 40px; background-color: #2c7135; display:inline-block; vertical-align: top;  }
+
+.PoolEndedInfo { display: none; }
+
+.PoolEth, .PoolTicketInfo { line-height: 26px; }
+
+.BtnRefresh { float: right; margin-top: 7px; }
+
+.EndPoolContainer { float: right; margin-top: 7px; font-size: 10px; clear: both; }
+.BtnPoolEnd { font-size: 10px; background-color: black; }
+.BtnSendMoney { background-color: black; }
+
+.PoolSendMsg { font-size: 10px; display: inline-block; vertical-align: middle; }
+
+.PoolWinnerContainer { margin-top: 5px; }
+
+.PoolMsg { display: inline-block; vertical-align: middle; }
+
+.infinity { font-size: 26px; display: inline-block; vertical-align: top; }
+
+.TicketTitle { font-size: 15px; margin-top: 10px; display: inline-block; color: #1293EE; }
+
+.TicketOwnedLine {display: none; }
+.TicketOwnedElem {margin: 3px 0; }
+.TicketPoolName { }
+.TicketPoolValue { font-weight: bold; }
+.TicketPoolChance {}
+
+.TicketPoolIndexContainer { font-size: 10px; }
+
+#PoolClearMsg { display: inline-block; font-size: 10px; vertical-align: middle; }
+#BtnClearPools { font-size: 10px; background-color: black; }

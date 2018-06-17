@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<head>
+    <!-- META -->
+    <meta charset="UTF-8">
+    
+    <!-- STYLES -->
+    <!-- <link type="text/css" href="css/style.css" rel="stylesheet" /> -->
+
+    
+    <!-- JS LIBS -->
+    <script type="text/javascript" src="lib/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="lib/web3.min.js"></script>
+
+	<script type="text/javascript" src="lib/ETH.js"></script>
+	
+    <!-- INTERNAL JS -->
+	<script type="text/javascript" src="PoolManager.js"></script>
+	<script type="text/javascript" src="fee_panel.js"></script>
+</head>
+
+<body>
+
+<!-- This block will display error message (see showError() in controller.js) -->
+<div id='Error'></div>
+
+<!-- This block contains the fee infos -->
+<h2>Current Fees</h2>
+Address : <span id='WebsiteAddr'></span><br>
+Fees : <span id='CurrentFees'></span>&nbsp;<button type="button" id="BtnRefreshFee">Refresh</button><br>
+<button type="button" id="BtnSendMyFee">Get My Fee</button>
+
+</body>
+
+</html>

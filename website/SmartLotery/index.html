@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<head>
+    <!-- META -->
+    <meta charset="UTF-8">
+    
+    <!-- STYLES -->
+    <!-- <link type="text/css" href="css/style.css" rel="stylesheet" /> -->
+
+    
+    <!-- JS LIBS -->
+    <script type="text/javascript" src="lib/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="lib/web3.min.js"></script>
+	
+	<script type="text/javascript" src="lib/ETH.js"></script>
+
+    <!-- INTERNAL JS -->
+	<script type="text/javascript" src="PoolManager.js"></script>
+	<script type="text/javascript" src="controller.js"></script>
+</head>
+
+<body>
+
+<!-- This block will display error message (see showError() in controller.js) -->
+<div id='Error'></div>
+
+<!-- This block will display the current account (injected by mist or metamask, see showAccount() in controller.js) -->
+Account : <div id='Account'></div>
+
+<!-- This block contains buttons for common actions with poolManager -->
+<div id='CommonButtons'>
+	<button type="button" id="BtnRefreshAll">Refresh all (no gas cost)</button>
+</div>
+
+<!-- The PoolList is filled dynamically with active pools (see fillPool() in controller.js) -->
+<h2>Active pools</h2>
+<div id="PoolList"></div>
+
+<!-- The PoolDoneList is filled dynamically with ended pools (see fillDone() in controller.js) -->
+<h2>Ended pools</h2>
+<button type="button" id="BtnClearPools">Clear pools done</button><br>
+<div id="PoolDoneList"></div>
+
+
+<!-- This block is cloned for each pool (see fillPoolLine() in controller.js)-->
+<div id="PoolLine" class="PoolLine" style='display:none'>
+	<div class="PoolInfo">
+		Id : <span class='PoolId'></span><br>
+		State : <span class='PoolState'></span><br>
+		TicketPrice : <span class='PoolTicketPrice'></span><br>
+		TicketsSold : <span class='PoolTicketInfo'></span><br>
+		CurrAmount : <span class='PoolCurrAmount'></span><br>
+		StartDate : <span class='PoolStartDate'></span><br>
+		Duration : <span class='PoolDuration'></span><br>
+		End date : <span class='PoolEndDate'></span><br>
+		Winner : <span class='PoolWinner'></span><br>
+	</div>
+	<div class="PoolBtns">
+		<input type='text' class='TicketCount' value='1'>
+		<button type="button" class="BtnPlay">Buy ticket(s)</button>
+		<button type="button" class="BtnPoolEnd">End pool</button>
+		<button type="button" class="BtnSendMoney">Send money</button>
+		<button type="button" class="BtnRefresh">Refresh (no gas cost)</button>
+	</div>
+</div>
+
+</body>
+
+</html>

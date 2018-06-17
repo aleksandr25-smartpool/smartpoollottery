@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Smart Pool Lottery</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">Smart Pool <span class="logo_colour">Lottery</span></a></h1>
+          <h2>Simple. Contemporary. Decentralized Lottery.</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li><a href="index.html">Home</a></li>
+          <li><a href="bet.html">- Bet - </a></li>
+          <li class="selected"><a href="how_to_play.html">How to play</a></li>
+          <li><a href="lottery_history.html">Lottery history</a></li>
+          <li><a href="FAQ.html">FAQ</a></li>
+          <li><a href="contract.html">Contract Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        <!-- insert your sidebar items here -->
+        <h3>Latest News</h3>
+        <h4>New Lottery Website Launched</h4>
+        <h5>January 1st, 2018</h5>
+        <p>Enjoy Decentralized world biggest lottery<br /><a href="bet.html">BET</a></p>
+        <p></p>
+        <h4>Bets are open</h4>
+        <h5>January 1st, 2018</h5>
+        <p>Learn how to bet.<br /><a href="how_to_play.html">How to play</a></p>
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="how_to_play.html">How to play</a></li>
+          <li><a href="FAQ.html">FAQ</a></li>
+          <li><a href="lottery_history.html">History</a></li>
+          <li><a href="contract.html">Contract</a></li>
+          <li><a href="run_your_site.html">Run your lottery website !</a></li>
+        </ul>
+        </form>
+      </div>
+      <div id="content">
+        <!-- insert the page content here -->
+        <h2><center>How to play:</center></h2>
+        <br>
+<br><br><br>
+<ul>
+
+  <li>
+<span class='Pinfo'><a href="#play1"> Play with a website and Metamask.</a></span><br>
+  </li>
+  <li>
+<span class='Pinfo'><a href="#play2"> Play directly with no intermediary using geth.</a></span> <br>
+  </li>
+
+    <br><br>
+  <br><br>
+
+      <li>
+<span class='Pinfo'><div id="play1">Play with a website and Metamask:</div></span><br>
+
+  1 - If you haven't already, download and install <a href="https://metamask.io/" target="_blank">Metamask</a>.<br>
+  2 - Enable the extension and sign in to your Metamask account.<br>
+  3 - Using the Chrome browser visit our <a href="bet.html">BET</a> page.<br>
+  4 - Choose the lottery pool you want to bet in.<br>
+  5 - Then choose the ticket amount you want to purchase, 1 minimum.<br>
+  6 - Click buy then confirm your purchase with the Metamask popup.<br>
+  7 - Good luck!<br><br>
+      <br><br>
+    </li>
+    <br>
+    <li>
+<span class='Pinfo'><div id="play2"> Play directly with no intermediary using geth:</div></span> <br>
+
+To play with <a href="https://geth.ethereum.org/downloads/" target="_blank">geth</a>, we provide a js library to simplify the contracts calls.<br>
+You can download <a href='SmartLotery/lib/ETH_geth.js' target="_blank">ETH_geth.js</a> and <a href='SmartLotery/PoolManager.js' target="_blank">PoolManager.js</a>.<br>
+<br>
+<b>ETH_geth.js</b> is a wrapper for web3 calls, used by PoolManager.js<br>
+<b>PoolManager.js</b> provides methods to access the contract directly in an easy way.<br>
+<br>
+USING POOLMANAGER IN GETH:<br>
+<br>
+1 - Open your <a href="https://geth.ethereum.org/downloads/" target="_blank">geth</a> console as usual.<br>
+<br>
+2 - Load the scripts :<br>
+on Linux : <br>
+<code>
+loadScript('path/to/scripts/ETH.js');<br>
+loadScript('path/to/scripts/PoolManager.js');<br>
+</code>
+on Windows: (note the double '\')<br>
+<code>
+loadScript('path\\to\\scripts\\ETH.js');<br>
+loadScript('path\\to\\scripts\\PoolManager.js');
+</code><br>
+<br>
+3 - Load the pools :<br>
+Then you can call in your console<br>
+<code>PoolManager.init()</code><br>
+You'll see the active and ended pools<br>
+<br>
+4 - Buy tickets for a pool (replace poolIndex and ticketCount):<br>
+<code>PoolManager.buyTickets(poolIndex, ticketCount)</code><br>
+This will send the transaction to the contract with the correct amount (ticketCount * ticketPrice)<br>
+NB : your account need to be unlocked (personal.unlockAccount(), <a>more info here</a>)<br>
+Wait a bit (maximum 30 secs) for the transaction to be mined before refreshing the pools (see other commands below)<br>
+<br>
+OTHER COMMANDS:<br>
+- Refresh the pools<br>
+<code>PoolManager.loadPools()</code><br>
+This will refresh all the pools info (active and ended)<br>
+or you can refresh only one pool with its index:<br>
+<code>var pool = PoolManager.getPool(index); // for an active pool<br>
+pool.load();</code><br>
+or <br>
+<code>var poolDone = PoolManager.getPoolDone(index); // for an ended pool<br>
+poolDone.load</code><br>
+each call to the load method will refresh the info<br>
+<br>
+- Check for a win<br>
+When a pool is ended, it goes into the pool done array, and the winner is picked 1 hour later<br>
+After <code>PoolManager.init()</code> or <code>PoolManager.loadPools()</code>, you can do :<br>
+(replace index by the pool you want to check)<br>
+<code>
+var poolDone = PoolManager.getPoolDone(index);<br>
+poolDone.winner;
+</code>
+<br>if it's 0x0000000000..., the winner is not picked yet<br>
+or just :<br>
+<code>poolDone; //to see all its info</code><br>
+<br>
+- Send its price to winner<br>
+<code>PoolManager.sendPoolMoney(index);</code><br>
+This sends the pool money to the winner. This is done automatically by our console, but anyone can call it too (this costs gas)<br>
+<br>
+- Changing account<br>
+You can change the account sending the transactions (like buy tickets)<br>
+<code>ETH.account = 'your_eth_addr'</code> (replace your_eth_addr by 0x..... inside the quotes)<br>
+or<br>
+<code>ETH.account = eth.accounts[1]</code> (if you have multiple accounts set)<br>
+By default, the account is eth.coinbase<br>
+<br>
+<br>
+UPDATE COMMANDS<br>
+The following commands are used to update the states of the pools.<br>
+They are called automatically by our console, since they cost some gas... But you are free to call them too :-)<br>
+<br>
+<code>PoolManager.checkPoolEnd(index)</code><br>
+This check if an active pool is ended, and restart one if it is (this costs a lot of gas)<br>
+If the pool was ended, it goes into the poolDone array<br>
+You can use PoolManager.loadPools() to refresh the pools at any time to see active and ended pools<br>
+<br>
+<code>PoolManager.checkPoolDone(index)</code><br>
+This check if a ended pool can be terminated (if one hour has passed since the ended state), and pick a winner if it can.<br>
+<br>
+<code>PoolManager.clearPoolsDone()</code><br>
+This clear the poolDone array, when all the money have been sent<br>
+<br>
+<code>PoolManager.sendPoolMoney(index)</code><br>
+Our console send the money to the winner automatically<br>
+      <br><br>
+    </li>
+    <br>
+ </ul>
+        <br>
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; Gambling&co | <a href="FAQ.html">FAQ</a> | <a href="run_your_site.html">Run your lottery website !</a> | <a href="contract.html">Contract</a> | <a href="http://www.html5webtemplates.co.uk" target="_blank">Website Templates</a>
+    </div>
+  </div>
+</body>
+</html>

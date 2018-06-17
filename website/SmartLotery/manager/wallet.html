@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <!-- META -->
+    <meta charset="UTF-8">
+    
+    <!-- STYLES -->
+    <!-- <link type="text/css" href="css/style.css" rel="stylesheet" /> -->
+
+    
+    <!-- JS LIBS -->
+	<script type="text/javascript" src="../lib/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="../lib/web3.min.js"></script>
+	
+	<script type="text/javascript" src="../lib/ETH.js"></script>
+
+    <!-- INTERNAL JS -->
+	<script type="text/javascript" src="../PoolManager.js"></script>
+	<script type="text/javascript" src="wallet.js"></script>
+</head>
+
+<body>
+
+<h2>Wallet</h2>
+<div>
+	account : <span id='Account'></span>
+</div>
+<div>Wallet Address : <span id='WalletAddr'></span>, totalBalance :  <span id='WalletBalance'></span></div>
+<div>My Tokens : <span id='Tokens'></span><button type='button' id='UpdateTokens'>Update</button></div>
+<div><button type='button' id='Distribute'>Distribute</button></div>
+<div><button type='button' id='GetReward'>Get reward</button></div>
+</body>
+
+</html>

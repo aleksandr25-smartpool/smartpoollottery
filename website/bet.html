@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Smart Pool Lottery</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+  <link rel="stylesheet" type="text/css" href="style/style.css" title="style" />
+
+	<!-- SmartLotery DApp -->
+	<link rel="stylesheet" type="text/css" href="SmartLotery/style/style.css" />
+
+	<!-- JS LIBS -->
+	<script type="text/javascript" src="SmartLotery/lib/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="SmartLotery/lib/web3.min.js"></script>
+
+	<script type="text/javascript" src="SmartLotery/lib/ETH.js"></script>
+
+	<!-- SmartLotery JS -->
+	<script type="text/javascript" src="SmartLotery/PoolManager.js"></script>
+	<script type="text/javascript" src="SmartLotery/controller.js"></script>
+
+</head>
+
+<body>
+  <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">Smart Pool <span class="logo_colour">Lottery</span></a></h1>
+          <h2>Simple. Contemporary. Decentralized Lottery.</h2>
+        </div>
+      </div>
+      <div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li><a href="index.html">Home</a></li>
+          <li class="selected"><a href="bet.html">- Bet - </a></li>
+          <li><a href="how_to_play.html">How to play</a></li>
+          <li><a href="lottery_history.html">Lottery history</a></li>
+          <li><a href="FAQ.html">FAQ</a></li>
+          <li><a href="contract.html">Contract Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="site_content">
+      <div class="sidebar">
+        <!-- insert your sidebar items here -->
+        <h3>Latest News</h3>
+        <h4>New Lottery Website Launched</h4>
+        <h5>January 1st, 2018</h5>
+        <p>Enjoy Decentralized world biggest lottery<br /><a href="bet.html">BET</a></p>
+        <p></p>
+        <h4>Bets are open</h4>
+        <h5>January 1st, 2018</h5>
+        <p>Learn how to bet.<br /><a href="how_to_play.html">How to play</a></p>
+        <h3>Useful Links</h3>
+        <ul>
+          <li><a href="how_to_play.html">How to play</a></li>
+          <li><a href="FAQ.html">FAQ</a></li>
+          <li><a href="lottery_history.html">History</a></li>
+          <li><a href="contract.html">Contract</a></li>
+          <li><a href="run_your_site.html">Run your lottery website !</a></li>
+        </ul>
+        </form>
+      </div>
+      <div id="content">
+        <!-- insert the page content here -->
+        <h1>Let's BET !</h1>
+
+
+
+
+<!-- This block will display error message (see showError() in controller.js) -->
+<div id='Error'></div>
+
+<!-- This block will display the current account (injected by mist or metamask, see showAccount() in controller.js) -->
+<div>Your account : <span id='Account'></span></div>
+
+<!-- This block will display active tickets -->
+<div><span class='TicketTitle'>Your active tickets : </span>
+	<div id='TicketActive' class='TicketOwned'>
+
+	</div>
+</div>
+<div><span class='TicketTitle'>Your tickets on ended pools : </span>
+	<div id='TicketEnded' class='TicketOwned'>
+
+	</div>
+</div>
+<div class='TicketOwnedLine TicketOwnedElem'>
+		<span class='TicketPoolName'>name 1</span> <span class='TicketPoolIndexContainer'>(index <span class='TicketPoolIndex'></span>)</span> :
+		<span class='TicketPoolValue'>2</span>
+		 (chance to win: <span class='TicketPoolChance'></span>%)
+</div>
+
+<!-- This block contains buttons for common actions with poolManager -->
+<div id='CommonButtons'>
+	<button type="button" id="BtnRefreshAll">Refresh all</button>
+</div>
+
+<!-- The PoolList is filled dynamically with active pools (see fillPool() in controller.js) -->
+<h2>Active pools</h2>
+<div id="PoolList"></div>
+
+<!-- The PoolDoneList is filled dynamically with ended pools (see fillDone() in controller.js) -->
+<h2>Ended pools</h2>
+<div id="PoolDoneList"></div>
+
+
+<div id="PoolClearContainer">
+	<button type="button" id="BtnClearPools">Clear pools done</button>
+	<span id='PoolClearMsg'>This clears pools done when all money has been sent<br>(called automatically by our bot because it costs gas)</span>
+</div>
+
+
+<!-- This block is cloned for each pool (see fillPoolLine() in controller.js)-->
+<div id="PoolLine" class="PoolLine" style='display:none'>
+	<div>
+		<div class='PoolTitle'>
+			<div class='PoolNameContainer'>
+				<div class='PoolName'></div>
+				<div class='PoolIdContainer'>Index: <span class='PoolId'></span></div>
+			</div>
+			<div class='PoolEthContainer'>
+				<span class='PoolCurrAmount'></span> / <span class='PoolEth'></span> ETH
+			</div>
+		</div>
+		<div class='PoolStateContainer'>
+		State : <span class='PoolState'></span><br>
+		</div>
+	</div>
+	<div class="PoolCart">
+		<div class="PoolCartLeft">
+			<div><span class='ticketLabel'>Tickets sold : </span><span class='ticketValue PoolTicketInfo'></span></div>
+			<div><span class='ticketLabel'>Ticket price : </span><span class='ticketValue PoolTicketPrice'>Ticket price</span> ETH</div>
+			<div class='PoolStartInfo PoolWinnerContainer'>Ticket(s) to buy :</div>
+			<div class='PoolEndedInfo PoolWinnerContainer'>Winner : <span class='PoolWinner'></span></div>
+		</div>
+		<div class="PoolCartRight">
+			<div>Start : <span class='PoolStartDate'></span></div>
+			<div>Start at block : <span class='PoolStartBlock'></span></div>
+			<div class='PoolStartInfo'>Maximum duration : <span class='PoolDuration'></span></div>
+
+			<div class='PoolEndedInfo'>End date : <span class='PoolEndDate'></span></div>
+			<div class='PoolEndedInfo'>End block : <span class='PoolEndBlock'></span></div>
+		</div>
+	</div>
+	<div class='PoolBottom'>
+
+		<input type='number' class='TicketCount' value='1'>
+		<button type="button" class="BtnPlay">Buy ticket(s)</button>
+		<button type="button" class="BtnRefresh">Refresh</button>
+
+		<button type="button" class="PoolEndedInfo BtnSendMoney">Send money</button>
+		<div class='PoolSendMsg'>Send the money to winner : <br>(called automatically by our bot because it costs gas)</div>
+
+		<div class='EndPoolContainer'>
+			<div class='PoolMsg'>This ends the pool and create a new one when the duration expires : <br>(called automatically by our bot because it costs gas)</div>
+			<button type="button" class="BtnPoolEnd">End pool</button>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+    <div id="content_footer"></div>
+    <div id="footer">
+      Copyright &copy; Gambling&co | <a href="FAQ.html">FAQ</a> | <a href="run_your_site.html">Run your lottery website !</a> | <a href="contract.html">Contract</a> | <a href="http://www.html5webtemplates.co.uk" target="_blank">Website Templates</a>
+    </div>
+  </div>
+</body>
+</html>
