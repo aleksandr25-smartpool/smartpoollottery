@@ -92,6 +92,7 @@ function _PoolManager()
 	this.callbackPoolDone = showPool;
 	
 	this.inited = false;
+	this.loading = false;
 
 	//Init with 2 callbacks to show pools
 	this.init = function(callbackPool, callbackPoolDone)
@@ -125,11 +126,18 @@ function _PoolManager()
 	
 	this.loadPools = function(callbackPool, callbackPoolDone)
 	{
+		if (this.loading)
+		{
+			showInfo('PoolManager already loading');
+			return false;
+		}
+		
 		showInfo('loading active pools');
 		var oThis = this;
 
         this.loadCount = 0;
         this.loadDoneCount = 0;
+		this.loading = true;
 
         if (typeof(callbackPool) == 'function')
             this.callbackPool = callbackPool;
@@ -151,7 +159,7 @@ function _PoolManager()
 			for (var i = 0; i < poolDoneCount; i++)
 				oThis.loadPool(i, true);
 		});
-		showInfo('all loaded');
+		return true;
 	}
 
 	this.loadPool = function(index, isDone)
@@ -187,8 +195,8 @@ function _PoolManager()
     {
         if (this.loadDoneCount < this.poolDoneCount || this.loadCount < this.poolCount)
             return;
-
-        if (typeof (this.callbackPool) == 'function')
+		
+		if (typeof (this.callbackPool) == 'function')
         {
             for (var i = 0; i < this.poolCount; i++)
 				if (typeof(this.pools[i]) != 'undefined')
@@ -200,6 +208,8 @@ function _PoolManager()
 				if (typeof(this.poolsDone[i]) != 'undefined')
 					this.callbackPoolDone(i, this.poolsDone[i]);
         }
+		
+		this.loading = false;
     }
 	
 	this._loadPool = function(index, isDone, callback, address)

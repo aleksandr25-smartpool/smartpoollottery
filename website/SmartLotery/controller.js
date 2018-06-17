@@ -1,7 +1,9 @@
-
-
+//The pool names and formatted amounts
 var poolNames = ['The John M. pool', 'The Jihan W. pool', 'The Nick S pool', 'The Bobby & Charles L. pool', 'The Andreas A. pool', 'The Vitalik B. pool'];
 var poolMax = ['inf', '10', '100', '10,000', '100,000', '10,000,000'];
+
+//Used to wait when already loading
+var refreshTimer = null;
 
 //Init
 $(document).ready(function()
@@ -117,7 +119,7 @@ function fillPoolLine(poolLine, pool)
 		var i = 1;
         for (i = 1; i < poolMax.length; i++)
         {
-            if (parseInt(maxEth) < parseInt(poolMax[i].replace(',','')))
+            if (parseInt(maxEth.replace(/,/g,'')) < parseInt(poolMax[i].replace(/,/g,'')))
                 break;
         }
 		i--;
@@ -271,7 +273,15 @@ function refreshAll()
 {
     console.log('refreshAll');
 
-    //Refresh all (so we can see the pool ended AND the new pool created)
-    $('#PoolList, #PoolDoneList, .TicketOwned').children().remove();
-    PoolManager.loadPools(fillPool, fillPoolDone);
+    //Refresh all (so we can see the pool ended and the new pool created, and tickets owned)
+	
+	if (refreshTimer !== null)
+		clearTimeout(refreshTimer);
+	
+	refreshTimer = setTimeout(function()
+	{
+		$('#PoolList, #PoolDoneList, .TicketOwned').children().remove();
+		if (!PoolManager.loadPools(fillPool, fillPoolDone))
+			refreshAll();
+	}, 300);    
 }
